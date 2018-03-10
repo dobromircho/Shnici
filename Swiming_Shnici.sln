@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiming_Shnici", "Swiming_Shnici.csproj", "{AD933C22-A69B-8658-C2B9-A42A1E0F4A24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swiming_Shnici.Editor", "Swiming_Shnici.Editor.csproj", "{5CCB5491-C9B3-785B-6043-1A0217C1F029}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD933C22-A69B-8658-C2B9-A42A1E0F4A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD933C22-A69B-8658-C2B9-A42A1E0F4A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD933C22-A69B-8658-C2B9-A42A1E0F4A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD933C22-A69B-8658-C2B9-A42A1E0F4A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CCB5491-C9B3-785B-6043-1A0217C1F029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CCB5491-C9B3-785B-6043-1A0217C1F029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CCB5491-C9B3-785B-6043-1A0217C1F029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CCB5491-C9B3-785B-6043-1A0217C1F029}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
