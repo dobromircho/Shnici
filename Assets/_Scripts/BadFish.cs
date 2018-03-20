@@ -13,6 +13,7 @@ public class BadFish : MonoBehaviour
     {
         speed = Random.Range(10, 15);
         color = GetComponentInChildren<MeshRenderer>();
+        //transform.Rotate(0, 0, 60);
         
     }
 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 774bb039706ddce4ca3c935c20c4a21b
+timeCreated: 1521283781
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: ADYS
+  fontNames:
+  - ADYS
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,6 +11,7 @@ public class Shnici : MonoBehaviour
     public GameObject hitRedfish;
     public GameObject hitfish;
     public GameObject particle;
+    public GameObject gramsText;
     public float forceDown;
     public float forceUp;
     float timerRed;
@@ -73,14 +74,15 @@ public class Shnici : MonoBehaviour
         if (other.gameObject.tag == "fish")
         {
             Instantiate(hitfish, other.transform.position, Quaternion.identity);
+            Instantiate(gramsText, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            GameManager.instance.IncreaseEnergy(1);
+            GameManager.instance.IncreaseTrashLevel(1);
         }
         if (other.gameObject.tag == "badfish")
         {
             Instantiate(hitRedfish, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            GameManager.instance.DecreaseEnergy(10);
+            //GameManager.instance.DecreaseEnergy(10);
             color.material.color = Color.red;
             isRed = true;
             timerRed = 0;
