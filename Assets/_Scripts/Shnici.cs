@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class Shnici : MonoBehaviour
 {
+    Dictionary<string, int> trashGrams = new Dictionary<string, int>();
     AudioSource sound;
     Rigidbody rb;
     SkinnedMeshRenderer color;
     public GameObject hitRedfish;
     public GameObject hitfish;
     public GameObject particle;
-    public GameObject gramsText;
+    public GameObject[] gramsPrefabs;
+    Dictionary<int,GameObject> gramsText = new Dictionary<int, GameObject>();
     public float forceDown;
     public float forceUp;
     float timerRed;
@@ -24,6 +26,21 @@ public class Shnici : MonoBehaviour
         color = GameObject.FindGameObjectWithTag("color").GetComponent<SkinnedMeshRenderer>();
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
+
+        trashGrams.Add("bag", 5);
+        trashGrams.Add("can", 10);
+        trashGrams.Add("yogurt", 20);
+        trashGrams.Add("net", 80);
+        trashGrams.Add("flipflop", 120);
+
+        gramsText.Add(5, gramsPrefabs[0]);
+        gramsText.Add(10, gramsPrefabs[1]);
+        gramsText.Add(20, gramsPrefabs[2]);
+        gramsText.Add(80, gramsPrefabs[3]);
+        gramsText.Add(120, gramsPrefabs[4]);
+
+
+        
     }
     
     void FixedUpdate()
@@ -33,7 +50,6 @@ public class Shnici : MonoBehaviour
         {
             color.material.color = Color.white;
             isRed = false;
-
         }
         if (rb.velocity.y == 0)
         {
@@ -71,12 +87,14 @@ public class Shnici : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
-        if (other.gameObject.tag == "fish")
+        if (trashGrams.ContainsKey(other.gameObject.tag))
         {
+            GameObject gramText = gramsText[trashGrams[other.gameObject.tag]];
             Instantiate(hitfish, other.transform.position, Quaternion.identity);
-            Instantiate(gramsText, other.transform.position, Quaternion.identity);
+            Instantiate(gramText, other.transform.position, Quaternion.identity);
+            GameManager.instance.IncreaseCollectedGrams(trashGrams[other.gameObject.tag]);
             Destroy(other.gameObject);
-            GameManager.instance.IncreaseTrashLevel(1);
+            //GameManager.instance.IncreaseTrashLevel();
         }
         if (other.gameObject.tag == "badfish")
         {

@@ -18,18 +18,24 @@ public class GameManager : MonoBehaviour
     public GameObject storyStart;
     public GameObject shniciSaying;
     public Text gameOver;
+    public Text collectedGramsText;
+    public GameObject gramsPanel;
     public float maxHeght;
     public float minHeght;
+
     AudioSource audioSource;
     float timer = -3;
     float timerEnergy;
     int fishCounter = 0;
+    float collectedGrams;
+    float maxCollectedGramsLVL1 = 2000;
     bool isGameStarted;
 
     void Start()
     {
+        gramsPanel.SetActive(false);
         instance = this;
-        trashLevel.value = 32;
+        //trashLevel.value = 32;
         audioSource = GetComponent<AudioSource>();
     }
     
@@ -53,13 +59,14 @@ public class GameManager : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if (trashLevel.value >= 100)
+        if (trashLevel.value >= 2000)
         {
             jump.gameObject.SetActive(false);
             gameOver.gameObject.SetActive(true);
         }
         if (timer >= Random.Range(1.5f,3))
         {
+
             Instantiate(trash[Random.Range(0, trash.Length)], new Vector3(22, Random.Range(minHeght, maxHeght), 5.54f), Quaternion.identity);
             fishCounter++;
             if (fishCounter >= Random.Range(3,5))
@@ -80,11 +87,10 @@ public class GameManager : MonoBehaviour
         trashLevel.value -= value;
     }*/
 
-    public void IncreaseTrashLevel(int value)
+    public void IncreaseTrashLevel()
     {
-        audioSource.clip = sounds[0];
-        audioSource.Play();
-        trashLevel.value += value;
+        
+        
     }
 
     public void ExitGame()
@@ -94,6 +100,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        gramsPanel.SetActive(true);
         start.gameObject.SetActive(false);
         storyStart.SetActive(false);
         shniciSaying.SetActive(true);
@@ -118,5 +125,14 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+    }
+
+    public void IncreaseCollectedGrams(int grams)
+    {
+        audioSource.clip = sounds[0];
+        audioSource.Play();
+        trashLevel.value += grams;
+        collectedGrams += grams;
+        collectedGramsText.text = collectedGrams + "/" + maxCollectedGramsLVL1 + "гр.";
     }
 }
