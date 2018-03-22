@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Shnici : MonoBehaviour
 {
+    public static Shnici instance;
     Dictionary<string, int> trashGrams = new Dictionary<string, int>();
     AudioSource sound;
     Rigidbody rb;
@@ -23,6 +24,7 @@ public class Shnici : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         color = GameObject.FindGameObjectWithTag("color").GetComponent<SkinnedMeshRenderer>();
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();

@@ -96,6 +96,8 @@
     <Compile Include="Assets\_Scripts\Fish.cs" />
     <Compile Include="Assets\_Scripts\GameManager.cs" />
     <Compile Include="Assets\_Scripts\GramsText.cs" />
+    <Compile Include="Assets\_Scripts\Jump.cs" />
+    <Compile Include="Assets\_Scripts\LittleFish.cs" />
     <Compile Include="Assets\_Scripts\Shnici.cs" />
   </ItemGroup>
   <ItemGroup>

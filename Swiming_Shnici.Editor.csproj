@@ -118,11 +118,11 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
-      <HintPath>Assets/Asset_Imports/JMO Assets/Editor/JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
-    </Reference>
     <Reference Include="JMOAssets">
       <HintPath>Assets/Asset_Imports/JMO Assets/Editor/JMOAssets.dll</HintPath>
+    </Reference>
+    <Reference Include="JMOAssets_CartoonFXFreeWelcome">
+      <HintPath>Assets/Asset_Imports/JMO Assets/Editor/JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
