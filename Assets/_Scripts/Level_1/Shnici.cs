@@ -14,9 +14,14 @@ public class Shnici : MonoBehaviour
     public GameObject hitfish;
     public GameObject particle;
     public GameObject[] gramsPrefabs;
+    public Slider oxygenLevel;
     Dictionary<int,GameObject> gramsText = new Dictionary<int, GameObject>();
+    Image oxigenColor;
+    Color oxigenRealColor;
     public float forceDown;
     public float forceUp;
+    public float oxyRecharge;
+    public float oxyDecharge;
     float timerRed;
     bool isJump;
     bool isZeroVelocity;
@@ -25,6 +30,8 @@ public class Shnici : MonoBehaviour
     void Start()
     {
         instance = this;
+        oxigenColor = GameObject.FindGameObjectWithTag("oxygenColor").GetComponent<Image>();
+        oxigenRealColor = oxigenColor.color;
         color = GameObject.FindGameObjectWithTag("color").GetComponent<SkinnedMeshRenderer>();
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
@@ -40,41 +47,16 @@ public class Shnici : MonoBehaviour
         gramsText.Add(20, gramsPrefabs[2]);
         gramsText.Add(80, gramsPrefabs[3]);
         gramsText.Add(120, gramsPrefabs[4]);
-
-
-        
     }
     
     void FixedUpdate()
     {
         timerRed += Time.deltaTime;
-        if (timerRed >=0.5f && isRed)
-        {
-            color.material.color = Color.white;
-            isRed = false;
-        }
-        if (rb.velocity.y == 0)
-        {
-            isJump = false;
-        }
-        if (!isJump)
-        {
-            if (!isZeroVelocity)
-            {
-                rb.velocity = Vector3.zero;
-            }
-            rb.AddForce(Vector3.down * forceDown, ForceMode.Force);
-        }
-        if (transform.position.y >= 10)
-        {
-            rb.velocity = Vector3.zero;
-            transform.position = new Vector3(transform.position.x, 10f, transform.position.z);
-        }
-        if (transform.position.y <= -10)
-        {
-            rb.velocity = Vector3.zero;
-            transform.position = new Vector3(transform.position.x, -10f, transform.position.z);
-        }
+        ColorChange();
+        CheckVelocity();
+        PushBodyDown();
+        HoldBodyUp(10);
+        HoldBodyDown(-10);
     }
 
     public void Jump()
@@ -96,16 +78,70 @@ public class Shnici : MonoBehaviour
             Instantiate(gramText, other.transform.position, Quaternion.identity);
             GameManager.instance.IncreaseCollectedGrams(trashGrams[other.gameObject.tag]);
             Destroy(other.gameObject);
-            //GameManager.instance.IncreaseTrashLevel();
         }
         if (other.gameObject.tag == "badfish")
         {
             Instantiate(hitRedfish, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            //GameManager.instance.DecreaseEnergy(10);
+            GameManager.instance.DecreaseOxygen(10);
             color.material.color = Color.red;
+            oxigenColor.color = Color.red;
             isRed = true;
             timerRed = 0;
+        }
+    }
+
+    void HoldBodyUp(int value)
+    {
+        if (transform.position.y >= value)
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = new Vector3(transform.position.x, value, transform.position.z);
+            GameManager.instance.IncreaseOxygen(2);
+            oxigenColor.color = Color.green;
+            isRed = true;
+            timerRed = 0;
+
+        }
+    }
+    void HoldBodyDown(int value)
+    {
+        if (transform.position.y <= value)
+        {
+            rb.velocity = Vector3.zero;
+            transform.position = new Vector3(transform.position.x, value, transform.position.z);
+            GameManager.instance.DecreaseOxygen(2);
+            color.material.color = Color.red;
+            oxigenColor.color = Color.red;
+            isRed = true;
+            timerRed = 0;
+        }
+    }
+    void PushBodyDown()
+    {
+        if (!isJump)
+        {
+            if (!isZeroVelocity)
+            {
+                rb.velocity = Vector3.zero;
+            }
+            rb.AddForce(Vector3.down * forceDown, ForceMode.Force);
+        }
+    }
+    void ColorChange()
+    {
+        if (timerRed >= 0.5f && isRed)
+        {
+            color.material.color = Color.white;
+            oxigenColor.color = oxigenRealColor;
+            isRed = false;
+        }
+    }
+    void CheckVelocity()
+    {
+        if (rb.velocity.y == 0)
+        {
+            isJump = false;
         }
     }
 }

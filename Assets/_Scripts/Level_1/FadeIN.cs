@@ -23,7 +23,7 @@ public class FadeIN : MonoBehaviour
         if (timer >= 1)
         {
             isFadeIN = true;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 }

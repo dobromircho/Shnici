@@ -15,7 +15,7 @@ public class StoryManager : MonoBehaviour
     public float timeTo2;
     public float timeTo3;
 
-    float timeToStart;
+    float timeToStart = 1;
     float timerStarter;
     bool isStarted;
 
