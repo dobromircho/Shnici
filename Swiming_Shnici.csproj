@@ -88,17 +88,22 @@
     <Compile Include="Assets\Asset_Imports\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
     <Compile Include="Assets\Asset_Imports\JMO Assets\Cartoon FX\Scripts\CFX_LightFlicker.cs" />
     <Compile Include="Assets\Asset_Imports\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
-    <Compile Include="Assets\_Scripts\BGMove.cs" />
-    <Compile Include="Assets\_Scripts\BadFish.cs" />
-    <Compile Include="Assets\_Scripts\DestoyInSeconds.cs" />
-    <Compile Include="Assets\_Scripts\EndLine.cs" />
-    <Compile Include="Assets\_Scripts\FadeOut.cs" />
-    <Compile Include="Assets\_Scripts\Fish.cs" />
-    <Compile Include="Assets\_Scripts\GameManager.cs" />
-    <Compile Include="Assets\_Scripts\GramsText.cs" />
-    <Compile Include="Assets\_Scripts\Jump.cs" />
-    <Compile Include="Assets\_Scripts\LittleFish.cs" />
-    <Compile Include="Assets\_Scripts\Shnici.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\BGMove.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\BadFish.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\DestoyInSeconds.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\EndLine.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\FadeIN.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\FadeOut.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\Fish.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\GameManager.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\GramsText.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\Jump.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\LittleFish.cs" />
+    <Compile Include="Assets\_Scripts\Level_1\Shnici.cs" />
+    <Compile Include="Assets\_Scripts\Start\StoryManager.cs" />
+    <Compile Include="Assets\_Scripts\Start\StoryScript.cs" />
+    <Compile Include="Assets\_Scripts\Start\StoryScript2.cs" />
+    <Compile Include="Assets\_Scripts\Start\StoryScript3.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Asset_Imports\JMO Assets\!JMO Assets Readme.txt" />

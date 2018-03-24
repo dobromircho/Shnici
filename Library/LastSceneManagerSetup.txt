@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scenes/Shnici_Swim.unity
+- path: Assets/_Scenes/Start_Scene.unity
   isLoaded: 1
   isActive: 1
