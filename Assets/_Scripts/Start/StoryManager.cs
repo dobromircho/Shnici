@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
 {
-    public GameObject story1;
-    public GameObject story2;
-    public GameObject story3;
+    public GameObject instructionPanel;
+    public GameObject instrPanelPage1;
+    public GameObject instrPanelPage2;
     public GameObject story4;
     public GameObject fadeIN;
-    public float timer;
+    public GameObject fadeOUT;
+
+    public float timer = -1;
     public float timeTo1;
     public float timeTo2;
     public float timeTo3;
@@ -23,21 +25,7 @@ public class StoryManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        if (timer >= timeTo1)
-        {
-            story1.SetActive(true);
-        }
-        if (timer >= timeTo2)
-        {
-            story4.SetActive(true);
-            story1.SetActive(false);
-            story2.SetActive(true);
-        }
-        if (timer >= timeTo3)
-        {
-            story2.SetActive(false);
-            story3.SetActive(true);
-        }
+        
         if (isStarted)
         {
             fadeIN.SetActive(true);
@@ -47,11 +35,35 @@ public class StoryManager : MonoBehaviour
                 SceneManager.LoadScene("Shnici_Level_1", LoadSceneMode.Single);
             }
         }
-        
+        if (FadeIN.isFadeIN)
+        {
+            fadeOUT.SetActive(true);
+            FadeIN.isFadeIN = false;
+        }
+        if (FadeOut.isFadeOut)
+        {
+            FadeOut.isFadeOut = false;
+        }
     }
 
     public void StartGame()
     {
         isStarted = true;
+    }
+
+    public void OpenInstructionPanel()
+    {
+        instructionPanel.SetActive(true);
+        FadeINOUT();
+    }
+    public void CloseInstructionPanel()
+    {
+        instructionPanel.SetActive(false);
+        FadeINOUT();
+    }
+
+    public void FadeINOUT()
+    {
+        fadeIN.SetActive(true);
     }
 }

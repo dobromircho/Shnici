@@ -22,8 +22,9 @@ public class FadeIN : MonoBehaviour
         fade.color = new Color(0, 0, 0, timer);
         if (timer >= 1)
         {
+            timer = 0;
             isFadeIN = true;
-            //gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

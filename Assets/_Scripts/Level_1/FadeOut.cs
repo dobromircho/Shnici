@@ -23,6 +23,7 @@ public class FadeOut : MonoBehaviour
         fade.color = new Color(0, 0, 0, timer);
         if (timer <= 0)
         {
+            timer = 1;
             isFadeOut = true;
             gameObject.SetActive(false);
         }

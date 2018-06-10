@@ -9,10 +9,11 @@ public class GameManager : MonoBehaviour
     public AudioClip[] sounds;
     public static GameManager instance;
     public GameObject[] trash;
-    public GameObject badFish;
+    public GameObject[] badFish;
     public GameObject gramsPanel;
     public GameObject jump;
     public GameObject menuPanel;
+    public GameObject shnici;
     public GameObject fadeIn;
 
     public Slider oxigenLevel;
@@ -25,12 +26,13 @@ public class GameManager : MonoBehaviour
     public float minHeght;
 
     AudioSource audioSource;
-    
+    Animator shniciAnim;
+    float timerWin;
     float timer = -3;
     float timerEnergy;
     float timerGameOver;
     float collectedGrams;
-    float maxCollectedGramsLVL1 = 2000;
+    float maxCollectedGramsLVL1 = 200;
     bool isGameStarted;
     bool isGameOver;
     int randomTrash;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        shniciAnim = shnici.GetComponent<Animator>();
         gramsPanel.SetActive(false);
         oxigenLevel.value = 100;
         instance = this;
@@ -60,11 +63,11 @@ public class GameManager : MonoBehaviour
         if (isGameOver)
         {
             timerGameOver += Time.deltaTime;
-            if (timerGameOver >= 2)
+            if (timerGameOver >= 5)
             {
                 fadeIn.SetActive(true);
             }
-            if (timerGameOver >= 5)
+            if (timerGameOver >= 7)
             {
                 SceneManager.LoadScene("Start_Scene");
             }
@@ -75,10 +78,23 @@ public class GameManager : MonoBehaviour
             timerEnergy = 0;
         }
 
-        if (trashLevel.value >= 2000)
+        if (trashLevel.value >= maxCollectedGramsLVL1)
         {
+            timerWin += Time.deltaTime;
+            shniciAnim.SetTrigger("winstart");
             jump.gameObject.SetActive(false);
-            //gameOver.gameObject.SetActive(true);
+            Shnici.instance.rb.velocity = Vector3.zero;
+            Shnici.instance.cc.enabled = false;
+            
+            Shnici.instance.transform.position = new Vector3(
+                Shnici.instance.transform.position.x,
+                Mathf.Lerp(Shnici.instance.transform.position.y, 0,timerWin),
+                Shnici.instance.transform.position.z);
+
+            timerEnergy = 0;
+            timer = 0;
+            gameOver.gameObject.SetActive(true);
+            isGameOver = true;
         }
         if (oxigenLevel.value <= 1)
         {
@@ -94,7 +110,7 @@ public class GameManager : MonoBehaviour
     }
     public void DecreaseOxygen(int value)
     {
-        if (value == 10)
+        if (value == 20)
         {
             audioSource.clip = sounds[1];
             audioSource.volume = 0.13f;
@@ -158,13 +174,13 @@ public class GameManager : MonoBehaviour
         {
             randomTrash++;
         }
-        Instantiate(trash[randomTrash], new Vector3(22, Random.Range(minHeght, maxHeght), 5.54f), Quaternion.identity);
+        Instantiate(trash[randomTrash], new Vector3(22, Random.Range(minHeght+1, maxHeght), 5.54f), Quaternion.identity);
         trashNumber = randomTrash;
         fishCounter++;
-        if (fishCounter >= Random.Range(1, 3))
+        if (fishCounter >= Random.Range(1, 2))
         {
             fishCounter = 0;
-            Instantiate(badFish, new Vector3(22, Random.Range(minHeght + 1, maxHeght - 1), 5.54f), Quaternion.LookRotation(Vector3.forward));
+            Instantiate(badFish[Random.Range(0,badFish.Length)], new Vector3(22, Random.Range(minHeght + 1, maxHeght), 5.54f), Quaternion.LookRotation(Vector3.forward));
         }
         timer = 0;
     }

@@ -8,8 +8,9 @@ public class Shnici : MonoBehaviour
     public static Shnici instance;
     Dictionary<string, int> trashGrams = new Dictionary<string, int>();
     AudioSource sound;
-    Rigidbody rb;
-    SkinnedMeshRenderer color;
+    public Rigidbody rb;
+    public CapsuleCollider cc;
+    SpriteRenderer color;
     public GameObject hitRedfish;
     public GameObject hitfish;
     public GameObject particle;
@@ -29,11 +30,12 @@ public class Shnici : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CapsuleCollider>();
         instance = this;
         oxigenColor = GameObject.FindGameObjectWithTag("oxygenColor").GetComponent<Image>();
         oxigenRealColor = oxigenColor.color;
-        color = GameObject.FindGameObjectWithTag("color").GetComponent<SkinnedMeshRenderer>();
-        rb = GetComponent<Rigidbody>();
+        color = GameObject.FindGameObjectWithTag("color").GetComponent<SpriteRenderer>();
         sound = GetComponent<AudioSource>();
 
         trashGrams.Add("bag", 5);
@@ -83,8 +85,8 @@ public class Shnici : MonoBehaviour
         {
             Instantiate(hitRedfish, other.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
-            GameManager.instance.DecreaseOxygen(10);
-            color.material.color = Color.red;
+            GameManager.instance.DecreaseOxygen(20);
+            color.color = Color.red;
             oxigenColor.color = Color.red;
             isRed = true;
             timerRed = 0;
@@ -98,7 +100,7 @@ public class Shnici : MonoBehaviour
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(transform.position.x, value, transform.position.z);
             GameManager.instance.IncreaseOxygen(2);
-            oxigenColor.color = Color.green;
+            oxigenColor.color = Color.white;
             isRed = true;
             timerRed = 0;
 
@@ -110,11 +112,11 @@ public class Shnici : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             transform.position = new Vector3(transform.position.x, value, transform.position.z);
-            GameManager.instance.DecreaseOxygen(2);
-            color.material.color = Color.red;
-            oxigenColor.color = Color.red;
-            isRed = true;
-            timerRed = 0;
+            //GameManager.instance.DecreaseOxygen(2);
+            //color.material.color = Color.red;
+            //oxigenColor.color = Color.red;
+            //isRed = true;
+            //timerRed = 0;
         }
     }
     void PushBodyDown()
@@ -132,7 +134,7 @@ public class Shnici : MonoBehaviour
     {
         if (timerRed >= 0.5f && isRed)
         {
-            color.material.color = Color.white;
+            color.color = Color.white;
             oxigenColor.color = oxigenRealColor;
             isRed = false;
         }
